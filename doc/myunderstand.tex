@@ -1,0 +1,63 @@
+\documentclass[a4paper, 12pt, UTF8]{ctexart}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin = 2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\newtheoremstyle{theoremstyle}
+  {}{}{\itshape\color{red}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{theoremstyle}
+\newtheorem{theorem}{theorem}
+
+\newtheoremstyle{propertystyle}
+  {}{}{\itshape\color{magenta}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{propertystyle}
+\newtheorem{property}[theorem]{property}
+
+\newtheoremstyle{definitionstyle}
+  {}{}{\normalfont\color{teal}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{definitionstyle}
+\newtheorem{definition}[theorem]{definition}
+
+\newtheoremstyle{algorithmstyle}
+  {}{}{\ttfamily\color{blue}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{algorithmstyle}
+\newtheorem{algorithm}[theorem]{algorithm}
+
+
+
+\title{transformer}
+\author{Yifei He}
+\date{\today}
+
+\begin{document}
+\maketitle
+首先提到翻译问题 要求神经网络的输入维度和输出维度是任意的。
+首先让一个模型可以处理任意维度的输入，token化。
+不同的信息之间肯定需要信息传递，但是单纯通过残差连接值矩阵 模型就太简单了
+我们需要引入权重，权重应该和信息传递的输出和接受方有关 同时应该是一个实数。于是我们想到kv矩阵 点积构造权重
+为了让单个token内部传递信息 只需要mlp
+不同token之间传递信息需要位置无关。
+
+该架构应该无法使用fnn表示
+
+于是我们得到了一个输入任意维度 输出为对应维度的nn
+我们事先指定小于输入维度个数的输出为我们需要的 就得到了一个输入为任意维度 输出为指定维度的nn
+很容易的 该模型非常适合用于预测，
+通过自回归，滚动预测任意长度的值。
+如果我们让模型自己决定何时停止输出，这就是一个无输入，输出模型自己决定的维度的nn
+自然语言输出也类似于预测 所以可以用这样的模型表示。
+
+回到最初的问题，我们需要的模型是输入任意维度 输出任意维度, 所以我们还需要在上述模型的基础上添加一个输入。
+这就是cross attention部分。我们可以将翻译任务分为两部分，
+首先是理解原文，转化为一个表示其含义的向量，
+然后是根据目标语言的语法知识来输出译文。
+我们之前提到的decoder only transformer 就可以用于第二步 且输出可以是任意维度。
+所以我们只需要类似self attention 但将信息的发射端改为完全不同的token空间 就可以实现任意维度信息的嵌入
+
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}
