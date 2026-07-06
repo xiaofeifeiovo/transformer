@@ -1,0 +1,45 @@
+\documentclass[a4paper, 12pt, UTF8]{ctexart}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[margin = 2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\newtheoremstyle{theoremstyle}
+  {}{}{\itshape\color{red}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{theoremstyle}
+\newtheorem{theorem}{theorem}
+
+\newtheoremstyle{propertystyle}
+  {}{}{\itshape\color{magenta}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{propertystyle}
+\newtheorem{property}[theorem]{property}
+
+\newtheoremstyle{definitionstyle}
+  {}{}{\normalfont\color{teal}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{definitionstyle}
+\newtheorem{definition}[theorem]{definition}
+
+\newtheoremstyle{algorithmstyle}
+  {}{}{\ttfamily\color{blue}}{}{\bfseries}{.}{\newline}{}
+\theoremstyle{algorithmstyle}
+\newtheorem{algorithm}[theorem]{algorithm}
+
+
+
+\title{}
+\author{Yifei He}
+\date{\today}
+
+\begin{document}
+\maketitle
+一个固定的隐藏token序列，一个时间层的单个输入通过cross attention传入， 经过多次self attention 和mlp优化自己内部信息。最后输出可以为无的输出
+
+或者通过将新的输入token接在隐藏token后面 通过self attention 向前传递。 输出。下一个时间层输入时进行阶段，只保留后隐藏token个数个token。
+然后想要输出的时候，再在后面添加几个特定token 分别对应不同种类的输出。进行前馈。
+
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}
