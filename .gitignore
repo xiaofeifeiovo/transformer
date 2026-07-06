@@ -1,0 +1,27 @@
+# Datasets
+dataset/
+datasets/
+
+# LaTeX build intermediates
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# LaTeX build results
+*.pdf
+*.dvi
+*.ps
