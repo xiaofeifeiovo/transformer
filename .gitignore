@@ -25,3 +25,6 @@ datasets/
 *.pdf
 *.dvi
 *.ps
+
+# macos
+.DS_store
